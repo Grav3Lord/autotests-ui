@@ -8,16 +8,16 @@ with sync_playwright() as playwright:
 
     page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
 
-    email_input = page.locator("input[id=':r0:']")
+    email_input = page.get_by_test_id('login-form-email-input').locator("input")
     email_input.fill("user.name@example.com")
 
-    password_input = page.locator("input[id=':r1:']")
+    password_input = page.get_by_test_id('login-form-password-input').locator("input")
     password_input.fill("password")
 
-    login_button = page.locator("button[id='login-page-login-button']")
+    login_button = page.get_by_test_id("login-page-login-button")
     login_button.click()
 
-    bad_creds_alert = page.locator('//div[@data-testid="login-page-wrong-email-or-password-alert"]')
+    bad_creds_alert = page.get_by_test_id('login-page-wrong-email-or-password-alert')
     expect(bad_creds_alert).to_be_visible()
     expect(bad_creds_alert).to_have_text("Wrong email or password")
 
